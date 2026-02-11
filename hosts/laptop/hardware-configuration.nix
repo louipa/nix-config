@@ -25,11 +25,13 @@
   boot.kernelModules = [
     "kvm-amd"
     "hid_sensor_hub"
+    "hid_sensor_accel_3d"
     "hid_multitouch"
     "hid_sensor_incl_3d"
     "hid_sensor_als"
     "hid_sensor_prox"
   ];
+
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {

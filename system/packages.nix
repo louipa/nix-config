@@ -1,6 +1,8 @@
 { pkgs, cursor, ... }:
 {
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   programs.firefox = {
     enable = true;
     policies = {
@@ -66,5 +68,7 @@
     fprintd
     iio-sensor-proxy
     eza
+    gnome-randr
+    libinput
   ];
 }
