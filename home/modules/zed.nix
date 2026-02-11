@@ -30,6 +30,11 @@
         enabled = true;
         provider = "copilot";
       };
+      theme = lib.mkForce {
+        mode = "system";
+        dark = "Cupertino";
+        light = "Cupertino";
+      };
     };
   };
 }
