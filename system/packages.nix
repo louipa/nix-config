@@ -69,5 +69,6 @@
     eza
     gnome-randr
     libinput
+    btop
   ];
 }

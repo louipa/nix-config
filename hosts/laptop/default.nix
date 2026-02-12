@@ -2,7 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ./tweaks.nix
-    ./auto-cpufreq.nix
+    ./power-usage.nix
     ../../configuration.nix
   ];
 
