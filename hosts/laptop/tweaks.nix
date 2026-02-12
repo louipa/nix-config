@@ -4,7 +4,10 @@
     enable32Bit = true;
   };
 
-  hardware.sensor.iio.enable = true;
+  # https://www.reddit.com/r/Fedora/comments/1n7lyno/lenovo_yoga_pro_7_14asp10_sound_issue/
+  environment.etc."modprobe.d/alc287.conf".text = ''
+    options snd-hda-intel model=(null),alc287-yoga9-bass-spk-pin
+  '';
 
   systemd.user.services.autorotate = {
     description = "Auto-rotate for Lenovo Yoga 2 in 1";
