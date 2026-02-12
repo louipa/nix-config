@@ -1,12 +1,8 @@
 {
   lib,
-  config,
   pkgs,
   ...
 }:
-let
-  inherit (lib) mkIf mkDefault;
-in
 {
   fonts.packages = with pkgs; [ _0xproto ];
   stylix.enable = true;

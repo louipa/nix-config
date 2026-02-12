@@ -1,14 +1,8 @@
 {
   lib,
-  config,
   pkgs,
-  inputs,
-  env,
   ...
 }:
-let
-  inherit (lib) mkIf mkDefault;
-in
 {
   config = {
     environment.systemPackages = with pkgs; [
