@@ -37,10 +37,6 @@
 
         ExtensionInstallForcelist = map (extension: extension.id) [
           {
-            name = "SponserBlock for Youtube";
-            id = "mnjggcdmjocbbbhaepdhchncahnbgone";
-          }
-          {
             name = "Uninternet";
             id = "ihgeijoonjmdfkamhpgoedplnmbencgd";
           }
