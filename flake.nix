@@ -19,6 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-sweep = {
+      url = "github:jzbor/nix-sweep";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Nix User Repository
     nur.url = "github:nix-community/NUR";
 
@@ -32,6 +37,7 @@
       home-manager,
       auto-cpufreq,
       stylix,
+      nix-sweep,
       nur,
       cursor,
       ...
@@ -72,6 +78,7 @@
             auto-cpufreq.nixosModules.default
             home-manager.nixosModules.home-manager
             stylix.nixosModules.stylix
+            nix-sweep.nixosModules.default
             homeManagerConfig
           ];
         };
