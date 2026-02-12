@@ -14,6 +14,8 @@
 
   services.udev.packages = with pkgs; [ platformio-core.udev ];
 
+  programs.steam.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Apps
     obsidian
@@ -55,9 +57,6 @@
 
     # Browser
     chromium
-
-    # Games
-    steam
 
     # System
     util-linux
