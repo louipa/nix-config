@@ -60,6 +60,7 @@
     obs-studio
     blender
     vlc
+    ollama
 
     # Browser
     chromium
@@ -76,5 +77,6 @@
     gnome-randr
     libinput
     btop
+    net-tools
   ];
 }
