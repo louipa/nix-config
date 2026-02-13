@@ -1,4 +1,9 @@
-{ pkgs, cursor, ... }:
+{
+  pkgs,
+  cursor,
+  affinity-nix,
+  ...
+}:
 {
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -23,6 +28,7 @@
     onlyoffice-desktopeditors
     unityhub
     orca-slicer
+    # affinity-nix.packages.x86_64-linux.v3
 
     # Communication
     discord

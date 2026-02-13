@@ -28,6 +28,7 @@
     nur.url = "github:nix-community/NUR";
 
     cursor.url = "github:TudorAndrei/cursor-nixos-flake";
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
   };
 
   outputs =
@@ -39,6 +40,7 @@
       nix-sweep,
       nur,
       cursor,
+      affinity-nix,
       ...
     }:
     let
@@ -70,6 +72,7 @@
 
           specialArgs = {
             inherit cursor;
+            inherit affinity-nix;
           };
 
           modules = [
