@@ -2,12 +2,6 @@
 
 {
   environment.systemPackages = with pkgs; [
-    (brave.override {
-      commandLineArgs = [
-        "--ozone-platform=wayland"
-        "--password-store=gnome"
-      ];
-    })
     nur.repos.forkprince.helium-nightly
 
     # Vanilla browsers for testing
@@ -15,37 +9,6 @@
     chromium
     epiphany
   ];
-
-  environment.etc."/brave/policies/managed/GroupPolicy.json".source =
-    (pkgs.formats.json { }).generate "brave-managed-policy.json"
-      {
-        BraveRewardsDisabled = true;
-        BraveWalletDisabled = true;
-        BraveAIChatEnabled = false;
-        AutofillEnabled = false;
-        AutofillProfileEnabled = false;
-        AutofillCreditCardEnabled = false;
-        PasswordManagerEnabled = false;
-        MetricsReportingEnabled = false;
-        CrashReportingEnabled = false;
-        BackgroundModeEnabled = false;
-        DnsOverHttpsMode = "secure";
-        PromotionalTabsEnabled = false;
-        PrivacySandboxPromptEnabled = false;
-
-        DefaultSearchProviderEnabled = true;
-
-        ExtensionInstallForcelist = map (extension: extension.id) [
-          {
-            name = "Uninternet";
-            id = "ihgeijoonjmdfkamhpgoedplnmbencgd";
-          }
-          {
-            name = "Remove Youtube Shorts";
-            id = "mgngbgbhliflggkamjnpdmegbkidiapm";
-          }
-        ];
-      };
 
   programs.firefox = {
     enable = true;
