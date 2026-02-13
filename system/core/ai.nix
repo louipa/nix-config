@@ -7,4 +7,8 @@
     # syncModels = true;
   };
 
+  services.nixai = {
+    enable = true;
+    mcp.enable = true;
+  };
 }
