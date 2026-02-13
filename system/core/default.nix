@@ -7,6 +7,7 @@
     ./user.nix
     ./printing.nix
     ./cleanup.nix
+    ./ai.nix
   ];
 
   nix.settings.experimental-features = [
