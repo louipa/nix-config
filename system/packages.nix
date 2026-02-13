@@ -35,7 +35,6 @@
     whatsapp-for-linux
     element-desktop
     tailscale
-    vesktop
     sidequest
     bruno
 
