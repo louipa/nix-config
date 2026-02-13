@@ -23,6 +23,8 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-amd"
+    "amd-pstate"
+    "k10temp"
     "hid_sensor_hub"
     "hid_sensor_accel_3d"
     "hid_multitouch"

@@ -78,5 +78,6 @@
     libinput
     btop
     net-tools
+    amdgpu_top
   ];
 }
