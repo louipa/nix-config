@@ -1,7 +1,6 @@
 {
   pkgs,
   cursor,
-  affinity-nix,
   ...
 }:
 {
