@@ -12,8 +12,4 @@ jobs:
       - uses: cachix/cachix-action@v15
         with:
           name: deadnix
-          pr-title: "chore: remove dead code"
-          pr-labels: |
-            cleanup
-            automated
       - uses: astro/deadnix-action@main
