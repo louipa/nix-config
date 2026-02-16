@@ -17,6 +17,7 @@
     gnomeExtensions.user-themes
     gnomeExtensions.open-bar
     gnomeExtensions.dock-from-dash
+    gnomeExtensions.bluetooth-battery-meter
     gnome-tweaks
     adwaita-icon-theme
     hicolor-icon-theme
