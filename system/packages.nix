@@ -54,6 +54,7 @@
     bat
     lazygit
     zoxide
+    bun
 
     # Multi media
     obs-studio
