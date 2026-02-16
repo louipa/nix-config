@@ -31,7 +31,7 @@
 
     # Communication
     discord
-    whatsapp-for-linux
+    wasistlos
     element-desktop
     tailscale
     sidequest
@@ -47,8 +47,9 @@
     # Developement tools
     go
     python314
+    nodejs_24
+    pnpm
     nixfmt
-    nixfmt-rfc-style
     starship
     bat
     lazygit
