@@ -56,6 +56,7 @@
     lazygit
     zoxide
     bun
+    hyfetch
 
     # Multi media
     obs-studio
