@@ -4,5 +4,6 @@
     ./stylix.nix
     ./zsh.nix
     ./browsers.nix
+    ./affinity.nix
   ];
 }
