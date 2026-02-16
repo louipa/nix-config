@@ -1,6 +1,7 @@
 {
   pkgs,
   cursor,
+  affinity-nix,
   ...
 }:
 {
@@ -27,7 +28,7 @@
     onlyoffice-desktopeditors
     unityhub
     orca-slicer
-    # affinity-nix.packages.x86_64-linux.v3
+    affinity-nix.packages.x86_64-linux.v3
 
     # Communication
     discord
