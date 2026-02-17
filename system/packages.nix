@@ -81,5 +81,6 @@
     btop
     net-tools
     amdgpu_top
+    input-remapper
   ];
 }
