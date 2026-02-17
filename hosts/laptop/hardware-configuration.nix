@@ -20,6 +20,11 @@
     "sd_mod"
     "sdhci_pci"
   ];
+  boot.kernelParams = [
+    "amd_pstate=active"
+    "processor.ignore_ppc=1"
+    "pcie_aspm=force"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-amd"

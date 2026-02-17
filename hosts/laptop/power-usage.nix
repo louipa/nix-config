@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
 
   # Disable power management for auto-cpufreq
@@ -17,7 +17,7 @@
       # enable_thresholds = true;
       # start_threshold = 20;
       # stop_threshold = 80;
-      scaling_max_freq = 2200000; # 2.2 GHz cap
+      scaling_max_freq = 2200000;
     };
     charger = {
       governor = "powersave";
@@ -25,4 +25,23 @@
       energy_performance_preference = "balance_power";
     };
   };
+
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
+  '';
+
+  hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = with pkgs; [
+    libva-vdpau-driver
+    libvdpau-va-gl
+  ];
+
+  boot.kernel.sysctl = {
+    "vm.dirty_ratio" = 10;
+    "vm.dirty_background_ratio" = 5;
+    "vm.dirty_writeback_centisecs" = 500;
+    "vm.dirty_expire_centisecs" = 1500;
+    "vm.swappiness" = 60;
+  };
+
 }
