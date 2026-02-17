@@ -29,6 +29,7 @@
     unityhub
     orca-slicer
     affinity-nix.packages.x86_64-linux.v3
+    xournalpp
 
     # Communication
     discord
