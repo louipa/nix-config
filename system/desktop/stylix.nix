@@ -7,7 +7,7 @@
   stylix.enable = true;
   stylix.targets.qt.enable = false;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-  stylix.image = ../../assets/wallpaper/deemo.jpg;
+  stylix.image = ../../assets/wallpaper/copyleft.png;
   stylix.opacity = {
     desktop = 0.9;
     applications = 0.9;
