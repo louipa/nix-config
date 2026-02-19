@@ -40,6 +40,8 @@
           c = "clear";
           h = "history";
           ports = "netstat -tulanp";
+          pbcopy = "xclip -selection clipboard";
+          olstop = "ollama ps | awk 'NR>1 {print $1}' | xargs -L 1  ollama stop";
 
           g = "lazygit";
           y = "yazi";

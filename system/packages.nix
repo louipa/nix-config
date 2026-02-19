@@ -86,5 +86,6 @@
     input-remapper
     powerstat
     powertop
+    xclip
   ];
 }
