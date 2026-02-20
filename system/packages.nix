@@ -30,6 +30,8 @@
     orca-slicer
     affinity-nix.packages.x86_64-linux.v3
     xournalpp
+    aseprite
+    krita
 
     # Communication
     discord
@@ -87,5 +89,6 @@
     powerstat
     powertop
     xclip
+    winboat
   ];
 }
