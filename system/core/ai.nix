@@ -21,10 +21,6 @@
       "deepseek-r1:8b"
     ];
   };
-  services.nixai = {
-    enable = true;
-    mcp.enable = true;
-  };
 
   services.open-webui = {
     enable = true;
@@ -36,5 +32,15 @@
         OLLAMA_API_BASE_URL = "http://${host}:${toString port}";
         WEBUI_AUTH = "False";
       };
+  };
+
+  services.nixai = {
+    enable = true;
+    mcp.enable = true;
+  };
+
+  systemd.services.nixai-mcp-server.serviceConfig = {
+    TimeoutStopSec = 10;
+    KillSignal = "SIGKILL";
   };
 }
