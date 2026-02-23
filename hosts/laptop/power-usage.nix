@@ -17,7 +17,7 @@
       # enable_thresholds = true;
       # start_threshold = 20;
       # stop_threshold = 80;
-      scaling_max_freq = 2200000;
+      # scaling_max_freq = 2200000;
     };
     charger = {
       governor = "powersave";
