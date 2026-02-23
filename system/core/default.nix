@@ -1,6 +1,7 @@
 {
   imports = [
     ./boot.nix
+    ./secureboot.nix
     ./networking.nix
     ./fonts.nix
     ./i8n.nix

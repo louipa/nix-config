@@ -90,5 +90,7 @@
     powertop
     xclip
     winboat
+    lon
+    sbctl
   ];
 }
