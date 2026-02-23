@@ -60,7 +60,6 @@
     zoxide
     bun
     hyfetch
-    niv
 
     # Multi media
     obs-studio

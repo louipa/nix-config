@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    agenix.url = "github:ryantm/agenix";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +45,7 @@
       cursor,
       affinity-nix,
       nixai,
+      agenix,
       ...
     }:
     let
@@ -84,6 +87,7 @@
             stylix.nixosModules.stylix
             nix-sweep.nixosModules.default
             nixai.nixosModules.default
+            agenix.nixosModules.default
             homeManagerConfig
           ];
         };
