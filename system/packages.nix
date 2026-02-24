@@ -91,5 +91,7 @@
     winboat
     lon
     sbctl
+    nix-ld
+    p7zip
   ];
 }
