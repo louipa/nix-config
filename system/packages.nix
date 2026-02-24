@@ -37,9 +37,7 @@
     discord
     wasistlos
     element-desktop
-    tailscale
     sidequest
-    bruno
 
     # Developement Apps
     postman
@@ -47,6 +45,12 @@
     zed-editor
     cursor.packages.x86_64-linux.cursor
     ghostty
+    jetbrains.rider
+    jetbrains.webstorm
+    bruno
+    tailscale
+    mono
+    dotnet-sdk
 
     # Developement tools
     go
@@ -60,6 +64,13 @@
     zoxide
     bun
     hyfetch
+
+    # VR
+    openxr-loader
+    openxr-loader.dev
+    vulkan-loader
+    vulkan-tools
+    libGL
 
     # Multi media
     obs-studio
