@@ -17,6 +17,13 @@
 
   programs.nix-ld.enable = true;
 
+  programs.nix-ld.libraries = with pkgs; [
+    openxr-loader
+    vulkan-loader
+    libGL
+    stdenv.cc.cc.lib
+  ];
+
   services.udev.packages = with pkgs; [ platformio-core.udev ];
 
   programs.steam.enable = true;
@@ -77,6 +84,7 @@
     blender
     vlc
     ollama
+    rmpc
 
     # Browser
     chromium
@@ -104,5 +112,6 @@
     sbctl
     nix-ld
     p7zip
+    mpc
   ];
 }
