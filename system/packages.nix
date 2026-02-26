@@ -39,6 +39,7 @@
     xournalpp
     aseprite
     krita
+    openshot-qt
 
     # Communication
     discord
@@ -58,6 +59,9 @@
     tailscale
     mono
     dotnet-sdk
+    android-tools
+    android-studio
+    clang
 
     # Developement tools
     go
