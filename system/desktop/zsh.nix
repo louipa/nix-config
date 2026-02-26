@@ -49,6 +49,18 @@
           oc = "bunx opencode-ai";
 
           nr = "sudo nixos-rebuild switch --flake /etc/nixos#laptop";
+
+          ## directory control
+          ".." = "cd ../";
+          "../" = "cd ../";
+          "..." = "cd ../..";
+
+          # tars
+          untar = "tar -zxvf";
+          mktar = "tar -cvzf";
+
+          myip = "curl https://ipecho.net/plain";
+          cls = "clear";
         };
 
         shellInit = ''
