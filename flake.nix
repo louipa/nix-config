@@ -73,9 +73,6 @@
             inherit system;
             config = {
               allowUnfree = true;
-              permittedInsecurePackages = [
-                "qtwebengine-5.15.19"
-              ];
             };
             overlays = overlays;
           };

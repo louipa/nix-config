@@ -39,7 +39,6 @@
     xournalpp
     aseprite
     krita
-    openshot-qt
 
     # Communication
     discord
