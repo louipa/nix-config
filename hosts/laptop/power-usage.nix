@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
 
-  # Disable power management for auto-cpufreq
   services.power-profiles-daemon.enable = false;
 
   powerManagement.powertop.enable = true;
@@ -25,6 +24,8 @@
       energy_performance_preference = "balance_power";
     };
   };
+
+  systemd.services.auto-cpufreq.path = [ pkgs.kmod ];
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="usb", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
