@@ -1,29 +1,31 @@
 { pkgs, ... }:
 {
 
-  services.power-profiles-daemon.enable = true;
+  services.power-profiles-daemon.enable = false;
 
   powerManagement.powertop.enable = true;
   services.thermald.enable = true;
 
-  # programs.auto-cpufreq.enable = true;
-  # programs.auto-cpufreq.settings = {
-  #   battery = {
-  #     ideapad_laptop_conservation_mode = true;
-  #     governor = "powersave";
-  #     turbo = "never";
-  #     energy_performance_preference = "power";
-  #     # enable_thresholds = true;
-  #     # start_threshold = 20;
-  #     # stop_threshold = 80;
-  #     # scaling_max_freq = 2200000;
-  #   };
-  #   charger = {
-  #     governor = "powersave";
-  #     turbo = "never";
-  #     energy_performance_preference = "balance_power";
-  #   };
-  # };
+  programs.auto-cpufreq.enable = true;
+  programs.auto-cpufreq.settings = {
+    battery = {
+      ideapad_laptop_conservation_mode = true;
+      governor = "powersave";
+      turbo = "never";
+      energy_performance_preference = "power";
+      # enable_thresholds = true;
+      # start_threshold = 20;
+      # stop_threshold = 80;
+      # scaling_max_freq = 2200000;
+    };
+    charger = {
+      governor = "powersave";
+      turbo = "never";
+      energy_performance_preference = "balance_power";
+    };
+  };
+
+  systemd.services.auto-cpufreq.path = [ pkgs.kmod ];
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="usb", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
