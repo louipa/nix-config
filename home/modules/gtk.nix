@@ -8,5 +8,10 @@
       name = lib.mkForce "adw-gtk3-dark";
       package = lib.mkForce pkgs.adw-gtk3;
     };
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
   };
+
 }
