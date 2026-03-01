@@ -14,6 +14,14 @@
     terminal = 0.9;
     popups = 0.9;
   };
+  stylix.cursor = {
+    package = pkgs.adwaita-icon-theme;
+    name = "Adwaita";
+    size = 24;
+  };
+
+  stylix.targets.gnome.enable = true;
+
   stylix.fonts = {
     serif = {
       package = pkgs.nerd-fonts.jetbrains-mono;

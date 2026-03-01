@@ -116,5 +116,6 @@
     nix-ld
     p7zip
     mpc
+    adw-gtk3
   ];
 }

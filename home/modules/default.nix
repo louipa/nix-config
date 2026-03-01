@@ -5,5 +5,6 @@
     ./zed.nix
     ./ghostty.nix
     ./mpd.nix
+    ./gtk.nix
   ];
 }
