@@ -1,7 +1,7 @@
 #!/run/current-system/sw/bin/bash
 
 OUTPUT="eDP-1"
-DEVICE="/dev/input/event8"
+DEVICE="/dev/input/yoga-tablet-switch"
 
 stdbuf -oL libinput debug-events --device "$DEVICE" | while IFS= read -r line; do
 

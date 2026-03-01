@@ -34,4 +34,10 @@
       "$HOME/bin/autorotate.sh"
     '';
   };
+  services.udev.extraRules = ''
+    SUBSYSTEM=="input", KERNEL=="event*", \
+      ATTRS{name}=="Lenovo Yoga Tablet Mode Control switch", \
+      SYMLINK+="input/yoga-tablet-switch", \
+      TAG+="uaccess"
+  '';
 }
