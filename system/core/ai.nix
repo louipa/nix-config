@@ -33,14 +33,4 @@
         WEBUI_AUTH = "False";
       };
   };
-
-  services.nixai = {
-    enable = true;
-    mcp.enable = true;
-  };
-
-  systemd.services.nixai-mcp-server.serviceConfig = {
-    TimeoutStopSec = 10;
-    KillSignal = "SIGKILL";
-  };
 }

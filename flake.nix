@@ -31,7 +31,6 @@
 
     cursor.url = "github:TudorAndrei/cursor-nixos-flake";
     affinity-nix.url = "github:mrshmllow/affinity-nix";
-    nixai.url = "github:olafkfreund/nix-ai-help";
   };
 
   outputs =
@@ -44,7 +43,6 @@
       nur,
       cursor,
       affinity-nix,
-      nixai,
       agenix,
       ...
     }:
@@ -88,7 +86,6 @@
             home-manager.nixosModules.home-manager
             stylix.nixosModules.stylix
             nix-sweep.nixosModules.default
-            nixai.nixosModules.default
             agenix.nixosModules.default
             homeManagerConfig
           ];
