@@ -11,6 +11,7 @@
     ./printing.nix
     ./cleanup.nix
     ./ai.nix
+    ./tailscale.nix
   ];
 
   nix.settings.experimental-features = [
