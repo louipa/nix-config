@@ -34,6 +34,11 @@
     cursor.url = "github:TudorAndrei/cursor-nixos-flake";
     affinity-nix.url = "github:mrshmllow/affinity-nix";
 
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,6 +58,7 @@
       affinity-nix,
       agenix,
       deploy-rs,
+      lanzaboote,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -95,6 +101,7 @@
                 stylix.nixosModules.stylix
                 nix-sweep.nixosModules.default
                 agenix.nixosModules.default
+                lanzaboote.nixosModules.lanzaboote
                 homeManagerConfig
               ];
             };
