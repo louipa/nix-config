@@ -41,7 +41,7 @@
   };
 
   outputs =
-    inputs @ {
+    inputs@{
       flake-parts,
       nixpkgs,
       home-manager,
@@ -120,8 +120,9 @@
           };
 
           deploy.nodes.homelab = {
-            hostname = "homelab";
+            hostname = "192.168.122.203";
             profiles.system = {
+              sshUser = "loupa";
               user = "root";
               path = deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.homelab;
             };

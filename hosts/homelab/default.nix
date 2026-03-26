@@ -7,7 +7,17 @@
     ../../system/core/agenix.nix
   ];
 
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/vda";
+  };
+
   networking.hostName = "homelab";
+
+  nix.settings.trusted-users = [
+    "root"
+    "loupa"
+  ];
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -22,6 +32,8 @@
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
+
+  security.sudo.wheelNeedsPassword = false;
 
   services.openssh = {
     enable = true;
