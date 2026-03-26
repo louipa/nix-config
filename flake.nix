@@ -117,12 +117,13 @@
               modules = [
                 hostPath
                 agenix.nixosModules.default
+                nix-sweep.nixosModules.default
               ];
             };
         in
         {
           nixosConfigurations = {
-            laptop = mkDesktopSystem { hostPath = ./hosts/laptop; };
+            yoga = mkDesktopSystem { hostPath = ./hosts/yoga; };
             homelab = mkServerSystem { hostPath = ./hosts/homelab; };
           };
 

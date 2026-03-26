@@ -3,10 +3,11 @@
     ./hardware-configuration.nix
     ./tweaks.nix
     ./power-usage.nix
-    ../../configuration.nix
+    ../../system/common
+    ../../system/desktop
   ];
 
-  networking.hostName = "laptop-loupa";
+  networking.hostName = "yoga";
 
   virtualisation.libvirtd = {
     enable = true;

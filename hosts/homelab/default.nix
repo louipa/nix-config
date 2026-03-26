@@ -1,10 +1,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../system/core/networking.nix
-    ../../system/core/i8n.nix
-    ../../system/core/user.nix
-    ../../system/core/agenix.nix
+    ../../system/common
   ];
 
   boot.loader.grub = {
@@ -14,18 +11,10 @@
 
   networking.hostName = "homelab";
 
-  nix.settings = {
-    trusted-users = [
-      "root"
-      "loupa"
-    ];
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    substituters = [ "https://cache.garnix.io" ];
-    trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
-  };
+  nix.settings.trusted-users = [
+    "root"
+    "loupa"
+  ];
 
   security.sudo.wheelNeedsPassword = false;
 

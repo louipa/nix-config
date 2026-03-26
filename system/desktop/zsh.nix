@@ -48,7 +48,8 @@
           cc = "bunx @anthropic-ai/claude-code";
           oc = "bunx opencode-ai";
 
-          nr = "sudo nixos-rebuild switch --flake /etc/nixos#laptop";
+          nr = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
+          nd = "deploy /etc/nixos";
 
           ## directory control
           ".." = "cd ../";
