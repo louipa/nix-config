@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
     agenix.url = "github:ryantm/agenix";
 
     home-manager = {
@@ -34,7 +36,8 @@
   };
 
   outputs =
-    {
+    inputs @ {
+      flake-parts,
       nixpkgs,
       home-manager,
       auto-cpufreq,
@@ -46,52 +49,69 @@
       agenix,
       ...
     }:
-    let
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
 
-      system = "x86_64-linux";
+      flake =
+        let
+          overlays = [ nur.overlays.default ];
 
-      overlays = [
-        # NUR overlay
-        nur.overlays.default
-      ];
-
-      homeManagerConfig = {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.backupFileExtension = "backup";
-        home-manager.users.loupa = import ./home/home.nix;
-      };
-
-      mkNixosSystem =
-        { hostPath }:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-
-          pkgs = import nixpkgs {
-            inherit system;
-            config = {
-              allowUnfree = true;
+          mkPkgs =
+            system:
+            import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+              inherit overlays;
             };
-            overlays = overlays;
+
+          homeManagerConfig = {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+            home-manager.users.loupa = import ./home/home.nix;
           };
 
-          specialArgs = {
-            inherit cursor;
-            inherit affinity-nix;
-          };
+          mkDesktopSystem =
+            {
+              system ? "x86_64-linux",
+              hostPath,
+            }:
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              pkgs = mkPkgs system;
+              specialArgs = {
+                inherit cursor affinity-nix;
+              };
+              modules = [
+                hostPath
+                auto-cpufreq.nixosModules.default
+                home-manager.nixosModules.home-manager
+                stylix.nixosModules.stylix
+                nix-sweep.nixosModules.default
+                agenix.nixosModules.default
+                homeManagerConfig
+              ];
+            };
 
-          modules = [
-            hostPath
-            auto-cpufreq.nixosModules.default
-            home-manager.nixosModules.home-manager
-            stylix.nixosModules.stylix
-            nix-sweep.nixosModules.default
-            agenix.nixosModules.default
-            homeManagerConfig
-          ];
+          mkServerSystem =
+            {
+              system ? "x86_64-linux",
+              hostPath,
+            }:
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              pkgs = mkPkgs system;
+              modules = [
+                hostPath
+                agenix.nixosModules.default
+              ];
+            };
+        in
+        {
+          nixosConfigurations = {
+            laptop = mkDesktopSystem { hostPath = ./hosts/laptop; };
+            homelab = mkServerSystem { hostPath = ./hosts/homelab; };
+          };
         };
-    in
-    {
-      nixosConfigurations.laptop = mkNixosSystem { hostPath = ./hosts/laptop; };
     };
 }
