@@ -48,7 +48,7 @@
           cc = "bunx @anthropic-ai/claude-code";
           oc = "bunx opencode-ai";
 
-          nr = "sudo nixos-rebuild switch --flake /etc/nixos#laptop";
+          nr = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
 
           ## directory control
           ".." = "cd ../";
@@ -67,6 +67,8 @@
           # Disable zsh's newuser startup script that prompts you to create
           # a ~/.z* file if missing
           zsh-newuser-install() { :; }
+
+          nd() { deploy "/etc/nixos#$1" }
 
           eval "$(zoxide init zsh)"
         '';

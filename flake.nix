@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
     agenix.url = "github:ryantm/agenix";
 
     home-manager = {
@@ -31,10 +33,21 @@
 
     cursor.url = "github:TudorAndrei/cursor-nixos-flake";
     affinity-nix.url = "github:mrshmllow/affinity-nix";
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    {
+    inputs@{
+      flake-parts,
       nixpkgs,
       home-manager,
       auto-cpufreq,
@@ -44,54 +57,90 @@
       cursor,
       affinity-nix,
       agenix,
+      deploy-rs,
+      lanzaboote,
       ...
     }:
-    let
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
 
-      system = "x86_64-linux";
+      flake =
+        let
+          overlays = [ nur.overlays.default ];
 
-      overlays = [
-        # NUR overlay
-        nur.overlays.default
-      ];
-
-      homeManagerConfig = {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.backupFileExtension = "backup";
-        home-manager.users.loupa = import ./home/home.nix;
-      };
-
-      mkNixosSystem =
-        { hostPath }:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-
-          pkgs = import nixpkgs {
-            inherit system;
-            config = {
-              allowUnfree = true;
+          mkPkgs =
+            system:
+            import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+              inherit overlays;
             };
-            overlays = overlays;
+
+          homeManagerConfig = {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+            home-manager.users.loupa = import ./home/home.nix;
           };
 
-          specialArgs = {
-            inherit cursor;
-            inherit affinity-nix;
+          mkDesktopSystem =
+            {
+              system ? "x86_64-linux",
+              hostPath,
+            }:
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              pkgs = mkPkgs system;
+              specialArgs = {
+                inherit cursor affinity-nix;
+              };
+              modules = [
+                hostPath
+                auto-cpufreq.nixosModules.default
+                home-manager.nixosModules.home-manager
+                stylix.nixosModules.stylix
+                nix-sweep.nixosModules.default
+                agenix.nixosModules.default
+                lanzaboote.nixosModules.lanzaboote
+                homeManagerConfig
+              ];
+            };
+
+          mkServerSystem =
+            {
+              system ? "x86_64-linux",
+              hostPath,
+            }:
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              pkgs = mkPkgs system;
+              modules = [
+                hostPath
+                agenix.nixosModules.default
+                nix-sweep.nixosModules.default
+              ];
+            };
+        in
+        {
+          nixosConfigurations = {
+            yoga = mkDesktopSystem { hostPath = ./hosts/yoga; };
+            homelab = mkServerSystem { hostPath = ./hosts/homelab; };
           };
 
-          modules = [
-            hostPath
-            auto-cpufreq.nixosModules.default
-            home-manager.nixosModules.home-manager
-            stylix.nixosModules.stylix
-            nix-sweep.nixosModules.default
-            agenix.nixosModules.default
-            homeManagerConfig
-          ];
+          deploy.nodes.homelab = {
+            hostname = "192.168.122.203";
+            profiles.system = {
+              sshUser = "loupa";
+              user = "root";
+              path = deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.homelab;
+            };
+          };
         };
-    in
-    {
-      nixosConfigurations.laptop = mkNixosSystem { hostPath = ./hosts/laptop; };
+
+      perSystem =
+        { system, ... }:
+        {
+          checks = deploy-rs.lib.${system}.deployChecks inputs.self.deploy;
+        };
     };
 }
