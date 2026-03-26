@@ -33,6 +33,11 @@
 
     cursor.url = "github:TudorAndrei/cursor-nixos-flake";
     affinity-nix.url = "github:mrshmllow/affinity-nix";
+
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -47,6 +52,7 @@
       cursor,
       affinity-nix,
       agenix,
+      deploy-rs,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -112,6 +118,20 @@
             laptop = mkDesktopSystem { hostPath = ./hosts/laptop; };
             homelab = mkServerSystem { hostPath = ./hosts/homelab; };
           };
+
+          deploy.nodes.homelab = {
+            hostname = "homelab";
+            profiles.system = {
+              user = "root";
+              path = deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.homelab;
+            };
+          };
+        };
+
+      perSystem =
+        { system, ... }:
+        {
+          checks = deploy-rs.lib.${system}.deployChecks inputs.self.deploy;
         };
     };
 }
