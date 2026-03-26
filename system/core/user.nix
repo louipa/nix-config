@@ -8,6 +8,7 @@
       "docker"
       "dialout"
       "input"
+      "libvirtd"
     ];
   };
 }

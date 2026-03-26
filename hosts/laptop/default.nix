@@ -8,5 +8,11 @@
 
   networking.hostName = "laptop-loupa";
 
+  virtualisation.libvirtd = {
+    enable = true;
+  };
+
+  programs.virt-manager.enable = true;
+
   system.stateVersion = "24.11";
 }
