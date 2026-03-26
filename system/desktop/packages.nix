@@ -117,5 +117,6 @@
     p7zip
     mpc
     adw-gtk3
+    deploy-rs
   ];
 }
