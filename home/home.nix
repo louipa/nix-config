@@ -1,6 +1,4 @@
-{
-  ...
-}:
+{ inputs, ... }:
 
 {
 
@@ -12,16 +10,11 @@
 
   imports = [
     ./modules
+    inputs.noctalia.homeModules.default
   ];
 
   home.sessionVariables = {
     # EDITOR = "emacs";
-  };
-
-  dconf.settings = {
-    "org/gnome/desktop/peripherals/touchpad" = {
-      speed = 0.4;
-    };
   };
 
   programs.home-manager.enable = true;

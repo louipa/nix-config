@@ -20,8 +20,6 @@
     size = 24;
   };
 
-  stylix.targets.gnome.enable = true;
-
   stylix.fonts = {
     serif = {
       package = pkgs.nerd-fonts.jetbrains-mono;

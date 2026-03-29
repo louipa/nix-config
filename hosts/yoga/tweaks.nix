@@ -20,9 +20,6 @@
       RestartSec = 5;
 
       Environment = [
-        "DISPLAY=:0"
-        "XAUTHORITY=$HOME/.Xauthority"
-        "LOG_LEVEL=DEBUG"
         "PATH=/run/current-system/sw/bin:/run/current-user/sw/bin:/usr/bin:/bin"
       ];
 

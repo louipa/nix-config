@@ -6,5 +6,7 @@
     ./ghostty.nix
     ./mpd.nix
     ./gtk.nix
+    ./niri.nix
+    ./noctalia.nix
   ];
 }
