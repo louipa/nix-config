@@ -10,7 +10,7 @@
 
   imports = [
     ./modules
-    inputs.noctalia.homeModules.default
+
   ];
 
   home.sessionVariables = {

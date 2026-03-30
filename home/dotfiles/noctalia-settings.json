@@ -1,0 +1,18 @@
+{
+  "general": {
+    "avatarImage": "/home/loupa/.face"
+  },
+  "location": {
+    "name": "Angers, France",
+    "use12hourFormat": false
+  },
+  "appLauncher": {
+    "enableClipboardHistory": true,
+    "terminalCommand": "ghostty -e",
+    "showCategories": false
+  },
+  "colorSchemes": {
+    "predefinedScheme": "Catppuccin",
+    "darkMode": true
+  }
+}
