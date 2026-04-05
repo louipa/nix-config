@@ -118,5 +118,6 @@
     mpc
     adw-gtk3
     deploy-rs
+    xwayland-satellite
   ];
 }
