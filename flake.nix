@@ -6,6 +6,11 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    nix-darwin = {
+      url = "github:nix-community/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     agenix.url = "github:ryantm/agenix";
 
     home-manager = {
@@ -55,6 +60,7 @@
     inputs@{
       flake-parts,
       nixpkgs,
+      nix-darwin,
       home-manager,
       auto-cpufreq,
       stylix,
@@ -68,7 +74,10 @@
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
 
       flake =
         let
@@ -127,11 +136,30 @@
                 nix-sweep.nixosModules.default
               ];
             };
+
+          mkDarwinSystem =
+            {
+              system ? "aarch64-darwin",
+              hostPath,
+            }:
+            nix-darwin.lib.darwinSystem {
+              inherit system;
+              pkgs = mkPkgs system;
+              modules = [
+                hostPath
+                home-manager.darwinModules.home-manager
+                homeManagerConfig
+              ];
+            };
         in
         {
           nixosConfigurations = {
             yoga = mkDesktopSystem { hostPath = ./hosts/yoga; };
             homelab = mkServerSystem { hostPath = ./hosts/homelab; };
+          };
+
+          darwinConfigurations = {
+            macbook = mkDarwinSystem { hostPath = ./hosts/macbook; };
           };
 
           deploy.nodes.homelab = {
@@ -147,7 +175,9 @@
       perSystem =
         { system, ... }:
         {
-          checks = deploy-rs.lib.${system}.deployChecks inputs.self.deploy;
+          checks = nixpkgs.lib.optionalAttrs (nixpkgs.lib.hasSuffix "-linux" system) (
+            deploy-rs.lib.${system}.deployChecks inputs.self.deploy
+          );
         };
     };
 }
