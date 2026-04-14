@@ -12,6 +12,7 @@
       "claude-code"
       "cursor"
       "command-x"
+      "bruno"
     ];
   };
 }

@@ -11,6 +11,7 @@
     lazyssh
 
     rectangle
+    betterdisplay
 
     nodejs_25
     pnpm
