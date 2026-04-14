@@ -10,6 +10,7 @@
       "claude"
       "claude-code"
       "cursor"
+      "command-x"
     ];
   };
 }

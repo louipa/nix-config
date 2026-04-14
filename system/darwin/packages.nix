@@ -8,10 +8,15 @@
     mkcert
     openvpn
     gnupg
+    lazyssh
+
+    rectangle
 
     nodejs_25
     pnpm
-
+    orbstack
+    vscode
+    
     localsend
     obsidian
     slack
