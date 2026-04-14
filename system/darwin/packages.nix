@@ -6,7 +6,14 @@
     curl
     unzip
     mkcert
-
     openvpn
+    gnupg
+
+    nodejs_25
+    pnpm
+
+    localsend
+    obsidian
+    slack
   ];
 }

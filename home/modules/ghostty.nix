@@ -14,7 +14,7 @@ in
 
   xdg.configFile."ghostty/config" = lib.mkIf isDarwin {
     text = ''
-      font-size = 18
+      font-size = 14
       selection-background = #44475a
       selection-foreground = #ffffff
     '';
