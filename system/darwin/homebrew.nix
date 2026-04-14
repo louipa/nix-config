@@ -6,6 +6,7 @@
       cleanup = "zap";
     };
     casks = [
+      "docker"
       "ghostty"
       "claude"
       "claude-code"

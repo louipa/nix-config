@@ -14,7 +14,7 @@
 
     nodejs_25
     pnpm
-    orbstack
+    docker-compose
     vscode
     
     localsend
