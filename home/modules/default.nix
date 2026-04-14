@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, system, ... }:
 {
   imports =
     [
@@ -6,8 +6,9 @@
       ./packages.nix
       ./zed.nix
       ./ghostty.nix
+      ./zsh.nix
     ]
-    ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals (!lib.hasSuffix "darwin" system) [
       ./mpd.nix
       ./gtk.nix
       ./niri.nix

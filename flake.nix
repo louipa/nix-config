@@ -7,7 +7,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     nix-darwin = {
-      url = "github:nix-community/nix-darwin";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -54,6 +54,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
+
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+
   };
 
   outputs =
@@ -71,6 +85,10 @@
       agenix,
       deploy-rs,
       lanzaboote,
+      ghostty,
+      nix-homebrew,
+      homebrew-core,
+      homebrew-cask,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -91,13 +109,15 @@
               inherit overlays;
             };
 
-          homeManagerConfig = {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.loupa = import ./home/home.nix;
-          };
+          mkHomeManagerConfig =
+            system:
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.extraSpecialArgs = { inherit inputs system; };
+              home-manager.users.loupa = import ./home/home.nix;
+            };
 
           mkDesktopSystem =
             {
@@ -118,7 +138,7 @@
                 nix-sweep.nixosModules.default
                 agenix.nixosModules.default
                 lanzaboote.nixosModules.lanzaboote
-                homeManagerConfig
+                (mkHomeManagerConfig system)
               ];
             };
 
@@ -145,10 +165,24 @@
             nix-darwin.lib.darwinSystem {
               inherit system;
               pkgs = mkPkgs system;
+              specialArgs = { inherit ghostty; };
               modules = [
                 hostPath
                 home-manager.darwinModules.home-manager
-                homeManagerConfig
+                nix-homebrew.darwinModules.nix-homebrew
+                {
+                  nix-homebrew = {
+                    enable = true;
+                    enableRosetta = true;
+                    user = "loupa";
+                    taps = {
+                      "homebrew/homebrew-core" = homebrew-core;
+                      "homebrew/homebrew-cask" = homebrew-cask;
+                    };
+                    mutableTaps = false;
+                  };
+                }
+                (mkHomeManagerConfig system)
               ];
             };
         in

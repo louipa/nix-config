@@ -6,5 +6,7 @@
     curl
     unzip
     mkcert
+
+    openvpn
   ];
 }

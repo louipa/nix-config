@@ -2,6 +2,8 @@
   imports = [
     ./settings.nix
     ./packages.nix
+    ./homebrew.nix
+    ./zsh.nix
   ];
 
   nix.settings = {
