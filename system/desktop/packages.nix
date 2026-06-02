@@ -89,8 +89,6 @@
     vlc
     ollama
     rmpc
-    stremio-linux-shell
-    flameshot
 
     # Browser
     chromium
