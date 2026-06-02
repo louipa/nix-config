@@ -36,5 +36,7 @@
       ATTRS{name}=="Lenovo Yoga Tablet Mode Control switch", \
       SYMLINK+="input/yoga-tablet-switch", \
       TAG+="uaccess"
+
+     SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee1", MODE="0660", GROUP="plugdev"
   '';
 }

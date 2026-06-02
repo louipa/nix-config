@@ -1,4 +1,5 @@
 {
+  users.groups.plugdev = { };
   users.users.loupa = {
     isNormalUser = true;
     description = "Louis Painter";
@@ -9,6 +10,7 @@
       "dialout"
       "input"
       "libvirtd"
+      "plugdev"
     ];
   };
 }

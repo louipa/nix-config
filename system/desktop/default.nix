@@ -5,7 +5,7 @@
     ./fonts.nix
     ./audio.nix
     ./printing.nix
-    ./niri.nix
+    ./gnome.nix
     ./stylix.nix
     ./zsh.nix
     ./browsers.nix
