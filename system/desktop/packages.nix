@@ -39,6 +39,7 @@
     xournalpp
     aseprite
     krita
+    nautilus
 
     # Communication
     discord
@@ -88,6 +89,8 @@
     vlc
     ollama
     rmpc
+    stremio-linux-shell
+    flameshot
 
     # Browser
     chromium
