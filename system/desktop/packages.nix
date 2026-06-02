@@ -43,7 +43,6 @@
 
     # Communication
     discord
-    wasistlos
     element-desktop
     sidequest
 
