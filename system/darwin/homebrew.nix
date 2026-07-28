@@ -7,6 +7,10 @@
     };
 
 
+    brews = [
+      "skillshare"
+    ];
+
     casks = [
       "docker"
       "ghostty"
