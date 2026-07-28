@@ -99,7 +99,19 @@
 
       flake =
         let
-          overlays = [ nur.overlays.default ];
+          overlays = [
+            nur.overlays.default
+            (final: prev: {
+              poetry =
+                if prev.stdenv.isDarwin then
+                  prev.poetry.overrideAttrs (_: {
+                    doCheck = false;
+                    doInstallCheck = false;
+                  })
+                else
+                  prev.poetry;
+            })
+          ];
 
           mkPkgs =
             system:
