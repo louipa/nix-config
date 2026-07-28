@@ -101,7 +101,7 @@
         let
           overlays = [
             nur.overlays.default
-            (final: prev: {
+            (_final: prev: {
               poetry =
                 if prev.stdenv.isDarwin then
                   prev.poetry.overrideAttrs (_: {
