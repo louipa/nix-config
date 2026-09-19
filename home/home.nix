@@ -4,7 +4,7 @@
 
   home = {
     username = "loupa";
-    homeDirectory = if pkgs.stdenv.isDarwin then "/Users/loupa" else "/home/loupa";
+    homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/loupa" else "/home/loupa";
     stateVersion = "24.11";
   };
 

@@ -1,7 +1,6 @@
 {
   pkgs,
   cursor,
-  affinity-nix,
   ...
 }:
 {
@@ -35,7 +34,7 @@
     onlyoffice-desktopeditors
     unityhub
     orca-slicer
-    affinity-nix.packages.x86_64-linux.v3
+    affinity-v3
     xournalpp
     aseprite
     krita
@@ -62,7 +61,7 @@
     android-studio
     clang
     filezilla
-    freecad
+    # freecad
 
     # Developement tools
     go

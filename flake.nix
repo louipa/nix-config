@@ -37,7 +37,10 @@
     nur.url = "github:nix-community/NUR";
 
     cursor.url = "github:TudorAndrei/cursor-nixos-flake";
-    affinity-nix.url = "github:mrshmllow/affinity-nix";
+    affinity-nix = {
+      url = "github:mrshmllow/affinity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
@@ -101,9 +104,10 @@
         let
           overlays = [
             nur.overlays.default
+            affinity-nix.overlays.default
             (_final: prev: {
               poetry =
-                if prev.stdenv.isDarwin then
+                if prev.stdenv.hostPlatform.isDarwin then
                   prev.poetry.overrideAttrs (_: {
                     doCheck = false;
                     doInstallCheck = false;
@@ -117,19 +121,19 @@
             system:
             import nixpkgs {
               inherit system;
-              config.allowUnfree = true;
+              config = {
+                allowUnfree = true;
+              };
               inherit overlays;
             };
 
-          mkHomeManagerConfig =
-            system:
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-              home-manager.extraSpecialArgs = { inherit inputs system; };
-              home-manager.users.loupa = import ./home/home.nix;
-            };
+          mkHomeManagerConfig = system: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+            home-manager.extraSpecialArgs = { inherit inputs system; };
+            home-manager.users.loupa = import ./home/home.nix;
+          };
 
           mkDesktopSystem =
             {
@@ -140,7 +144,7 @@
               inherit system;
               pkgs = mkPkgs system;
               specialArgs = {
-                inherit cursor affinity-nix;
+                inherit cursor;
               };
               modules = [
                 hostPath
