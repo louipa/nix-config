@@ -61,7 +61,7 @@
     android-studio
     clang
     filezilla
-    # freecad
+    freecad
 
     # Developement tools
     go
