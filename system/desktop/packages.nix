@@ -25,7 +25,13 @@
 
   services.udev.packages = with pkgs; [ platformio-core.udev ];
 
-  programs.steam.enable = true;
+  services.usbmuxd.enable = true;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
 
   environment.systemPackages = with pkgs; [
     # Apps
@@ -39,6 +45,7 @@
     aseprite
     krita
     nautilus
+    moonlight-qt
 
     # Communication
     discord
@@ -61,7 +68,7 @@
     android-studio
     clang
     filezilla
-    freecad
+    # freecad
 
     # Developement tools
     go
@@ -75,6 +82,7 @@
     zoxide
     bun
     hyfetch
+    opencode
 
     # VR
     openxr-loader
@@ -89,6 +97,7 @@
     vlc
     ollama
     rmpc
+    eden
 
     # Browser
     chromium
@@ -120,5 +129,10 @@
     adw-gtk3
     deploy-rs
     xwayland-satellite
+
+    # iPhone
+    libimobiledevice
+    ifuse
+    gvfs
   ];
 }
